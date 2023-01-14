@@ -69,7 +69,7 @@ const Register: React.FC<RegisterProps> = () => {
                     }
                 </div>
                 <div style={{width: "100%", display: "flex", flexDirection: "column", gap: "20px"}}>
-                    <TextField id="outlined-basic" label="name" variant="outlined" value={name} onChange={e => setName(e.target.value)} style={{width: "100%"}} InputProps={{
+                    <TextField error={missingInfo == "name" ? true : false} id="outlined-basic" label="name" variant="outlined" value={name} onChange={e => setName(e.target.value)} style={{width: "100%"}} InputProps={{
                        
                         startAdornment: (
                             <InputAdornment position='start'>
@@ -77,7 +77,7 @@ const Register: React.FC<RegisterProps> = () => {
                             </InputAdornment>
                         )
                     }}/>
-                    <TextField id="outlined-basic" label="email" variant="outlined" value={email} onChange={e => setEmail(e.target.value)} style={{width: "100%"}} InputProps={{
+                    <TextField error={missingInfo == "email" ? true : false} id="outlined-basic" label="email" variant="outlined" value={email} onChange={e => setEmail(e.target.value)} style={{width: "100%"}} InputProps={{
                         startAdornment: (
                             <InputAdornment position='start'>
                                 <MdMail style={{height: "20px", width: "20px"}} />
@@ -85,7 +85,7 @@ const Register: React.FC<RegisterProps> = () => {
                         )
                     }}/>
                     
-                    <TextField id="outlined-basic" label="password" type="password" variant="outlined" value={password} onChange={e => setPassword(e.target.value)} style={{width: "100%"}} InputProps={{
+                    <TextField error={missingInfo == "password" ? true : false} id="outlined-basic" label="password" type="password" variant="outlined" value={password} onChange={e => setPassword(e.target.value)} style={{width: "100%"}} InputProps={{
                         startAdornment: (
                             <InputAdornment position='start'>
                                 <HiLockClosed style={{height: "20px", width: "20px"}} />

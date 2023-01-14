@@ -7,7 +7,6 @@ import {HiLockClosed} from 'react-icons/hi';
 import {MdMail} from 'react-icons/md';
 
 import { Link } from 'react-router-dom';
-import navigate from '../functions/navigate';
 
 interface LoginProps {}
 
@@ -73,7 +72,7 @@ const Login: React.FC<LoginProps> = () => {
                     }
                 </div>
                 <div style={{width: "100%", display: "flex", flexDirection: "column", gap: "20px"}}>
-                    <TextField id="outlined-basic" label="email" variant="outlined" value={email} onChange={e => setEmail(e.target.value)} style={{width: "100%"}} InputProps={{
+                    <TextField error={missingInfo == "email" ? true : false} id="outlined-basic" label="email" variant="outlined" value={email} onChange={e => setEmail(e.target.value)} style={{width: "100%"}} InputProps={{
                         startAdornment: (
                             <InputAdornment position='start'>
                                 <MdMail style={{height: "20px", width: "20px"}} />
@@ -81,7 +80,7 @@ const Login: React.FC<LoginProps> = () => {
                         )
                     }}/>
                     
-                    <TextField id="outlined-basic" label="password" type="password" variant="outlined" value={password} onChange={e => setPassword(e.target.value)} style={{width: "100%"}} InputProps={{
+                    <TextField error={missingInfo == "password" ? true : false} id="outlined-basic" label="password" type="password" variant="outlined" value={password} onChange={e => setPassword(e.target.value)} style={{width: "100%"}} InputProps={{
                         startAdornment: (
                             <InputAdornment position='start'>
                                 <HiLockClosed style={{height: "20px", width: "20px"}} />
