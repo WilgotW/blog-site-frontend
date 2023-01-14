@@ -37,7 +37,8 @@ export default function Home() {
               </div> */}
               <div style={{height: "180px", display: "flex",justifyContent: "center", alignItems: "center", width: "100%"}}>    
                 <div style={{display: "flex", flexDirection: "column", gap: "20px"}}>
-                  <div style={{borderBottom: "solid white 2px", borderRadius: "20px", width: "230px"}}></div>    
+                  <div style={{borderBottom: "solid white 2px", borderRadius: "20px", width: "230px"}}></div> 
+                  <span style={{fontWeight: "200"}}>or</span>   
                   <div>
                     <Button variant="contained" style={{width: "200px", height: "50px"}} onClick={() => navigate("/create")}>create blog</Button>
                   </div>       
@@ -45,7 +46,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className='animate-popup' style={{width: "400px", height:"400px", borderRadius: "500px", background: "white", display: "flex", justifyContent: "space-around", alignItems: "center"}}>
+          <div className='animate-popup-right' style={{width: "400px", height:"400px", borderRadius: "500px", background: "white", display: "flex", justifyContent: "space-around", alignItems: "center"}}>
             <div>
               <h1 style={{color: "#6B4BCB", fontSize: "50px", fontWeight: "600"}}>Blog IT</h1>
               <h4 style={{color: "#6B4BCB", fontWeight: "100"}}>Create, Read and Connect</h4>

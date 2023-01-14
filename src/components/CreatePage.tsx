@@ -4,6 +4,8 @@ import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import {RxCross2} from 'react-icons/rx'; 
 
+import { useNavigate } from 'react-router-dom';
+
 interface BlogPost {
     title: string;
     content: string;
@@ -12,12 +14,16 @@ interface BlogPost {
 const CreatePage: React.FC = () => {
     
     const [loading, setLoading] = useState<boolean>(false);
-
+    const [succes, setSucces] = useState<boolean>(false);
     const [title, setTitle] = useState<String>("");
     const [content, setContent] = useState<String>("");
+    
+    const nav = useNavigate();
+    const navigate = (path: String) => nav(path.toString());
 
     const post = async (ev: React.MouseEvent<HTMLButtonElement>) => {
         ev.preventDefault();
+        
         
         setLoading(true);
 
@@ -34,10 +40,9 @@ const CreatePage: React.FC = () => {
                     content: content
                 })
             })
+
+            setSucces(true);
             
-            const data = await response.json();
-            
-            console.log(await data)
         }catch(err){
             console.log(err);
         }
@@ -45,16 +50,16 @@ const CreatePage: React.FC = () => {
         setLoading(false);
     }
     return (
-        <div style={{display: "flex", justifyContent: "center"}} className="background-gradient">
+        <div style={{display: "flex", justifyContent: "center", height: "100vh"}} className="background-gradient">
             
             <div style={{position: "absolute", width: "500px", height: "100px"}}>
                 <div style={{display: "flex", justifyContent: "right", alignItems: "center", height: "80px"}}>
-                    <RxCross2 className='hover-icon' style={{height: "30px", width: "30px"}} />
+                    <RxCross2 className='hover-icon' style={{height: "30px", width: "30px"}} onClick={() => navigate("/")} />
                 </div>
             </div>
             
-            <div style={{display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", width: "fit-content", background: "white", padding: "50px"}}>
-                <div style={{display: "flex", flexDirection: "column", gap: "50px"}}>
+            <div style={{display: "flex", justifyContent: "center", alignItems: "center", height: "100%", width: "fit-content", background: "white", paddingRight: "50px", paddingLeft: "50px"}}>
+                <div className='animate-popup' style={{display: "flex", flexDirection: "column", gap: "50px"}}>
                     <h1 style={{fontWeight: "400"}}>New Blog</h1>
                     <div style={{marginBottom: "200px", display: "flex", flexDirection: "column", gap: "20px", alignItems: "center"}}>
                         
@@ -68,7 +73,6 @@ const CreatePage: React.FC = () => {
                             multiline
                             rows={10}
                             style={{width: "500px"}}
-                            defaultValue="My Blog"
                         />
                         <div style={{display: "flex", justifyContent: "left", width: "100%"}}>
 
@@ -76,9 +80,14 @@ const CreatePage: React.FC = () => {
                                 {loading ?
                                     <CircularProgress style={{color: "gray"}} size={24} /> 
                                     :
-                                    <span>login</span>
+                                    <span>POST BLOG</span>
                                 }
                             </Button>
+                        </div>
+                        <div style={{height: "75px"}}>
+                            {succes &&
+                                <span style={{color: "#6B4BCB"}}>Succesfully created blog!</span>                             
+                            }
                         </div>
                     </div>
                 </div>
