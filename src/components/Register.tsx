@@ -25,21 +25,20 @@ const Register: React.FC<RegisterProps> = () => {
 
   const register = async () => {
     setLoading(true);
-    const response = await fetch("http://localhost:4000/api/user/login", {
+    const response = await fetch("http://localhost:4000/api/user/register", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin':'*'
         },
         body: JSON.stringify({
+            name: name,
             email: email,
             password: password
         })
     })
-
-    //save to localstorage
-    localStorage.setItem('token', await response.json());
     setLoading(false);
+    alert(`Welcome ${name}`);
   }
 
   return (
@@ -51,7 +50,7 @@ const Register: React.FC<RegisterProps> = () => {
                 </div>
                 <div style={{width: "100%", display: "flex", flexDirection: "column", gap: "20px"}}>
                         
-                    <TextField id="outlined-basic" label="name" variant="outlined" value={email} onChange={e => setEmail(e.target.value)} style={{width: "100%"}} InputProps={{
+                    <TextField id="outlined-basic" label="name" variant="outlined" value={name} onChange={e => setName(e.target.value)} style={{width: "100%"}} InputProps={{
                         startAdornment: (
                             <InputAdornment position='start'>
                                 <BsFillPersonFill style={{height: "20px", width: "20px"}} />
@@ -66,7 +65,7 @@ const Register: React.FC<RegisterProps> = () => {
                         )
                     }}/>
                     
-                    <TextField id="outlined-basic" label="password" variant="outlined" value={password} onChange={e => setPassword(e.target.value)} style={{width: "100%"}} InputProps={{
+                    <TextField id="outlined-basic" label="password" type="password" variant="outlined" value={password} onChange={e => setPassword(e.target.value)} style={{width: "100%"}} InputProps={{
                         startAdornment: (
                             <InputAdornment position='start'>
                                 <HiLockClosed style={{height: "20px", width: "20px"}} />

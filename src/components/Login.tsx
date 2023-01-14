@@ -21,20 +21,26 @@ const Login: React.FC<LoginProps> = () => {
 
   const login = async () => {
     setLoading(true);
-    const response = await fetch("http://localhost:4000/api/user/login", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin':'*'
-        },
-        body: JSON.stringify({
-            email: email,
-            password: password
+    try{
+        const response = await fetch("http://localhost:4000/api/user/login", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin':'*'
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password
+            })
         })
-    })
-
-    //save to localstorage
-    localStorage.setItem('token', await response.json());
+        
+        const data = await response.json();
+        //save to localstorage
+        localStorage.setItem('token', await data);
+        console.log(await data)
+    }catch(err){
+        console.log(err);
+    }
     setLoading(false);
   }
 
@@ -56,7 +62,7 @@ const Login: React.FC<LoginProps> = () => {
                         )
                     }}/>
                     
-                    <TextField id="outlined-basic" label="password" variant="outlined" value={password} onChange={e => setPassword(e.target.value)} style={{width: "100%"}} InputProps={{
+                    <TextField id="outlined-basic" label="password" type="password" variant="outlined" value={password} onChange={e => setPassword(e.target.value)} style={{width: "100%"}} InputProps={{
                         startAdornment: (
                             <InputAdornment position='start'>
                                 <HiLockClosed style={{height: "20px", width: "20px"}} />
