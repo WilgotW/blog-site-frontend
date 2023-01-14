@@ -27,3 +27,6 @@ body {
   background-color: white;
   border-radius: 8px;
 } 
+.login-form.bigger{
+  height: 540px;
+}

@@ -3,9 +3,11 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import InputAdornment from '@mui/material/InputAdornment';
 import CircularProgress from '@mui/material/CircularProgress';
-import {BsFillPersonFill} from 'react-icons/bs';
 import {HiLockClosed} from 'react-icons/hi';
 import {MdMail} from 'react-icons/md';
+
+import { Link } from 'react-router-dom';
+import navigate from '../functions/navigate';
 
 interface LoginProps {}
 
@@ -13,13 +15,23 @@ const Login: React.FC<LoginProps> = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [missingInfo, setMissingInfo] = useState("");
+  const [loginFailed, setLoginFailed] = useState(false);
 
   const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     login();
   }
 
-  const login = async () => {
+  const login = async () => {  
+    setLoginFailed(false);
+
+    if(!email){
+        return setMissingInfo("email");
+    }else if(!password){
+        return setMissingInfo("password");
+    }
+        
     setLoading(true);
     try{
         const response = await fetch("http://localhost:4000/api/user/login", {
@@ -39,6 +51,7 @@ const Login: React.FC<LoginProps> = () => {
         localStorage.setItem('token', await data);
         console.log(await data)
     }catch(err){
+        setLoginFailed(true);
         console.log(err);
     }
     setLoading(false);
@@ -47,13 +60,19 @@ const Login: React.FC<LoginProps> = () => {
   return (
     <div className='form-container'>
         <form className="login-form" onSubmit={handleSubmit}>
-            <div style={{display: "flex", flexDirection: "column", gap: "50px", width: "100%", justifyContent: "space-around"}}>
+            <div style={{display: "flex", flexDirection: "column", gap: "30px", width: "100%", justifyContent: "space-around"}}>
                 <div style={{height: "120px", borderBottom: "solid gray 1px", width: "100%"}}>
                     <h1>Login</h1>
                 </div>
+                <div style={{display: "flex", justifyContent: "center", height: "20px"}}>
+                    {missingInfo &&
+                        <span style={{color: "red"}}>please enter an {missingInfo}</span>
+                    }
+                    {loginFailed &&
+                        <span style={{color: "red"}}>email or password incorrect</span>
+                    }
+                </div>
                 <div style={{width: "100%", display: "flex", flexDirection: "column", gap: "20px"}}>
-                        
-                    
                     <TextField id="outlined-basic" label="email" variant="outlined" value={email} onChange={e => setEmail(e.target.value)} style={{width: "100%"}} InputProps={{
                         startAdornment: (
                             <InputAdornment position='start'>
@@ -81,7 +100,7 @@ const Login: React.FC<LoginProps> = () => {
                 </div>
                 <div>
                     <span>Not a member? </span>
-                    <a href="">Signup</a>
+                    <Link to="/register">Signup</Link>
                 </div>
             </div>
         </form>
