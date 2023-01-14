@@ -16,7 +16,7 @@ export default function Home() {
     <div>
       <div style={{height: "70px", background: "#f5f5f5", display: "flex", justifyContent: "right", alignItems: "center"}}>
         <div style={{width: "500px", display:"flex", justifyContent: "center", gap: "30px"}}>
-          <Button variant="outlined" >My profile</Button>
+          <Button variant="outlined" onClick={() => navigate("/my-profile")} >My profile</Button>
           <Button variant="contained" className='button-style' onClick={() => navigate("/login")}>LOGIN</Button>
         </div>
       </div>

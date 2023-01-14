@@ -49,6 +49,7 @@ const Register: React.FC<RegisterProps> = () => {
                 password: password
             })
         })
+        localStorage.setItem('user_name', name);
         alert(`Welcome ${name}`);
     }catch(err){
         console.log(err);

@@ -117,6 +117,30 @@ body {
   height: 540px;
 }
 
+.my-post-grid{
+  padding: 30px;
+  width: 85%;
+  place-items: center;
+  gap: 50px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
 
 
+.box {
+  z-index: 100;
+  width: 100px;
+  height: 100px;
+  background: red;
+  transform: rotate(0deg); /* Initial rotation */
+  transition: transform 0.2s; /* Add transition for smooth rotation */
+}
 
+.box:hover {
+  transform: rotate(5deg); /* Rotate by 5 degrees on hover */
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  background-color: transparent;
+}
