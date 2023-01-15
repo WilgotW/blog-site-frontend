@@ -45,7 +45,7 @@ const Register: React.FC<RegisterProps> = () => {
     setLoading(true);
     
     try{
-        const response = await fetch("http://localhost:4000/api/user/register", {
+        const response = await fetch("https://blogsite-backend-postgressql-production.up.railway.app/api/user/register", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

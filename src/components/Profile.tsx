@@ -25,7 +25,7 @@ const Profile:FC = () => {
     const getUsername = async () => {
         try{
         
-            const response = await fetch("http://localhost:4000/api/user/get-user-info", {
+            const response = await fetch("https://blogsite-backend-postgressql-production.up.railway.app/api/user/get-user-info", {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ const Profile:FC = () => {
         
         try{
         
-            const response = await fetch("http://localhost:4000/api/blog/my-posts", {
+            const response = await fetch("https://blogsite-backend-postgressql-production.up.railway.app/api/blog/my-posts", {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -72,6 +72,10 @@ const Profile:FC = () => {
         getUsername();
         getMyPosts();
     }, [])
+
+    useEffect(() => {
+        console.log(posts);
+    }, [posts])
 
   return (
     <div className='background-gradient' style={{height: "100vh", display: "flex", justifyContent: "center"}}>

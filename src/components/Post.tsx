@@ -20,7 +20,7 @@ const Post = ({title, content, likes, date, blog_id}: IProps) =>  {
     const likePost = async (cValue: Number) => {
         try{
         
-            const response = await fetch(`http://localhost:4000/api/blog/like/${blog_id}`, {
+            const response = await fetch(`https://blogsite-backend-postgressql-production.up.railway.app/api/blog/like/${blog_id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -41,10 +41,11 @@ const Post = ({title, content, likes, date, blog_id}: IProps) =>  {
     }
     
     useEffect(() => {
+        console.log(date)
         if (parentRef.current) setParentHeight(parentRef.current.clientHeight);
     }, []);
     
-    if(!likes) return null;
+    // if(!likes) return null;
   return (
     <div style={{width: "550px", height: "400px", background: "#f5f5f5", borderRadius: "20px", boxShadow: "2px 2px 2px #ccc", position: "relative"}}>
     <div style={{display: "flex", justifyContent: "center"}}>
@@ -76,7 +77,11 @@ const Post = ({title, content, likes, date, blog_id}: IProps) =>  {
     <div style={{display: "flex", justifyContent: "flex-end", position: "absolute", bottom: 0, right:0}}>
         <div style={{display: "flex", width: "80%", padding:"13px" , justifyContent: "right", alignItems: "center"}}>
             <span style={{fontWeight: "600", color: "gray"}}>
-                {likes.toString()}
+                {likes &&
+                    <>
+                        {likes.toString()}
+                    </>
+                }
             </span>
             {likedPost ?
                 <>

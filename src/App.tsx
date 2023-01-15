@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import './MediaQueries.css';
 import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';

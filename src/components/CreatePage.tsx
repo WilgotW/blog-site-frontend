@@ -28,7 +28,7 @@ const CreatePage: React.FC = () => {
         setLoading(true);
 
         try{
-            const response = await fetch("http://localhost:4000/api/blog/post", {
+            const response = await fetch("https://blogsite-backend-postgressql-production.up.railway.app/api/blog/post", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

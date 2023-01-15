@@ -27,7 +27,7 @@ const BlogSection:FC = () => {
 
     const getPopularBlogs = async () => {
         try{
-            const response = await fetch(`http://localhost:4000/api/blog/get-popular/${popularAmount}`, {
+            const response = await fetch(`https://blogsite-backend-postgressql-production.up.railway.app/api/blog/get-popular/${popularAmount}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ const BlogSection:FC = () => {
     }
     const getNewestBlogs = async () => {
         try{
-            const response = await fetch(`http://localhost:4000/api/blog/get-newest/${newAmount}`, {
+            const response = await fetch(`https://blogsite-backend-postgressql-production.up.railway.app/api/blog/get-newest/${newAmount}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
