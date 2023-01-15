@@ -125,7 +125,17 @@ body {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
-
+.post-grid{
+  padding: 30px;
+  width: 95%;
+  place-items: center;
+  gap: 50px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.post-grid.small{
+  grid-template-columns: repeat(2, 1fr);
+}
 
 .box {
   z-index: 100;
@@ -147,4 +157,14 @@ body {
 
 .bottom-border-gradient{
   background: linear-gradient(to top, rgb(111, 111, 111) 0%, rgba(128,128,128,0) 100%);
+}
+
+.text-gradient {
+  background-image: linear-gradient(to right, rgba(62,97,200,1), rgba(179,41,209,1));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.icon:hover{
+  cursor: pointer;
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -6,29 +6,62 @@ import InputAdornment from '@mui/material/InputAdornment';
 import {BiSearch} from 'react-icons/bi';
 // import navigatePath from '../functions/navigatePath';
 import { useNavigate } from 'react-router-dom';
+import {AiOutlineArrowDown} from 'react-icons/ai'
+import BlogSection from './BlogSection';
 
 export default function Home() {
+
+  const myRef = useRef(null);
 
   const nav = useNavigate();
   const navigate = (path: String) => nav(path.toString());
 
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+
+  const checkIfLoggedIn = () => {
+    if(localStorage.getItem('token') == undefined || localStorage.getItem('token') == null){
+      setLoggedIn(false);
+    }else{
+      setLoggedIn(true);
+    }
+  }
+
+  const logOut = () => {
+    console.log(localStorage.getItem('token'))
+    localStorage.clear();
+    window.location.reload();
+  }
+
+  useEffect(() => {
+    checkIfLoggedIn();
+  }, [])
+
   return (
     <div>
       <div style={{height: "70px", background: "#f5f5f5", display: "flex", justifyContent: "right", alignItems: "center"}}>
+        <div style={{display: "flex", width: "70%"}}>
+          <h2 className='text-gradient'>Blog IT</h2>
+        </div>
         <div style={{width: "500px", display:"flex", justifyContent: "center", gap: "30px"}}>
-          <Button variant="outlined" onClick={() => navigate("/my-profile")} >My profile</Button>
-          <Button variant="contained" className='button-style' onClick={() => navigate("/login")}>LOGIN</Button>
+          {loggedIn ?
+            <>
+              <Button variant="outlined" onClick={() => navigate("/my-profile")} >My profile</Button>
+              <Button variant="outlined" onClick={() => logOut()}>Log out</Button>
+            </>
+            :
+            <Button variant="contained" className='button-style' onClick={() => navigate("/login")}>LOGIN</Button>
+          }
         </div>
       </div>
       <div style={{padding: "10px"}}>
-        <div className='background-gradient' style={{height: "600px", padding: "100px", color: "white", display: "flex", justifyContent: "center"}}>
+        <div className='background-gradient' style={{height: "600px", padding: "100px", color: "white", display: "flex", justifyContent: "center", position: "relative"}}>
           <div className='popup-after-animation' style={{display: "flex", alignItems: "center", height: "500px"}}>
-            <div style={{display: "flex", flexDirection: "column"}}>
-              <h1 style={{color: "white"}}>Find Users and Blogs</h1>
+            <div style={{display: "flex", flexDirection: "column", width: "300px"}}>
+              <h1 style={{color: "white", width: "fit-content"}}>Find Blogs</h1>
               <TextField id="outlined-basic" label="search" variant="filled" InputProps={{
                 startAdornment: (
                   <InputAdornment position='start'>
-                    <BiSearch style={{height: "20px", width: "20px", color: "white"}} />
+                    <BiSearch style={{height: "20px", width: "20px", color: "white"}} className="icon" onClick={() => navigate("/search")} />
                   </InputAdornment>
                 )
               }}/>
@@ -57,8 +90,20 @@ export default function Home() {
           </div>
           {/* <h3>BlogIT is a website that lets you create blogs manly focusing on IT blogs. Here you can post about your ideas, progress and IT projects!</h3>
           <Link to="/login" >Hello</Link> */}
+          {/* <div style={{position: "absolute", bottom: "150px", background: "red", width: "500px", zIndex: "10", height: "30px"}}></div> */}
+          
+          <div style={{position: "absolute", bottom: "0", left: "0", display: "flex", justifyContent: "center", width: "100%", height: "100px"}}>
+            {loggedIn ?
+              <Button variant="outlined" style={{width: "200px", height: "50px", color: "white", borderColor: "white"}} startIcon={<AiOutlineArrowDown />} endIcon={<AiOutlineArrowDown />}>Browse</Button>
+              :
+              <Button variant="outlined" onClick={() => navigate("/login")}  style={{width: "200px", height: "50px", color: "white", borderColor: "white"}} startIcon={<AiOutlineArrowDown />} endIcon={<AiOutlineArrowDown />}>Browse</Button>
+            }
+          </div>
         </div>
       </div>
+      {loggedIn &&
+        <BlogSection />
+      }
     </div>
   )
 }

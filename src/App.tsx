@@ -7,6 +7,7 @@ import Register from './components/Register';
 import { HashRouter as Router, Route, Routes , useParams} from 'react-router-dom';
 import CreatePage from './components/CreatePage';
 import Profile from './components/Profile';
+import BlogSearchPage from './components/BlogSearchPage';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
           <Route path='/register' element={<Register />} />
           <Route path='/create' element={<CreatePage />} />
           <Route path='/my-profile' element={<Profile />} />
-          
+          <Route path='/search' element={<BlogSearchPage />} />
         </Routes>
       </div>
     </Router>

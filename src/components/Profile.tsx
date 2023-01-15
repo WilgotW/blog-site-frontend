@@ -23,7 +23,6 @@ const Profile:FC = () => {
     const navigate = (path: String) => nav(path.toString());
 
     const getUsername = async () => {
-        console.log(localStorage.getItem("token"))
         try{
         
             const response = await fetch("http://localhost:4000/api/user/get-user-info", {
@@ -103,7 +102,7 @@ const Profile:FC = () => {
                     <div className='my-post-grid'>
                         {Object.keys(posts).length > 0 &&
                             <>
-                                {Object.entries(posts).map(([key, value]) => <Post key={key} title={value.title} content={value.content} likes={value.likes} />)}
+                                {Object.entries(posts).map(([key, value]) => <Post key={key} title={value.title} content={value.content} likes={value.likes} date={value.date} blog_id={value.blog_id} />)}
                             </>
                         }
                     </div>

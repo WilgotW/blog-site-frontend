@@ -5,6 +5,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import CircularProgress from '@mui/material/CircularProgress';
 import {HiLockClosed} from 'react-icons/hi';
 import {MdMail} from 'react-icons/md';
+import {RxCross2} from 'react-icons/rx'; 
 
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -76,6 +77,11 @@ const Login: React.FC<LoginProps> = () => {
     <div className='form-container'>
         <form className="login-form" onSubmit={handleSubmit}>
             <div style={{display: "flex", flexDirection: "column", gap: "30px", width: "100%", justifyContent: "space-around"}}>
+
+                <div style={{position: "absolute", display: "flex", justifyContent: "right", width: "400px", height: "480px", userSelect: "none"}}>
+                    <RxCross2 className='hover-icon' style={{height: "30px", width: "30px"}} onClick={() => navigate("/")} />
+                </div>
+
                 <div style={{height: "120px", borderBottom: "solid gray 1px", width: "100%"}}>
                     <h1>Login</h1>
                 </div>
@@ -113,9 +119,9 @@ const Login: React.FC<LoginProps> = () => {
                         }
                     </Button>
                 </div>
-                <div>
+                <div style={{zIndex: "100"}}>
                     <span>Not a member? </span>
-                    <Link to="/register">Signup</Link>
+                    <Link to="/register" >Signup</Link>
                 </div>
             </div>
         </form>

@@ -11,6 +11,7 @@ import {MdMail} from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
+import {RxCross2} from 'react-icons/rx'; 
 
 interface RegisterProps {}
 
@@ -78,6 +79,9 @@ const Register: React.FC<RegisterProps> = () => {
     <div className='form-container'>
         <form className="login-form bigger" onSubmit={handleSubmit}>
             <div style={{display: "flex", flexDirection: "column", gap: "30px", width: "100%", justifyContent: "space-around"}}>
+                <div style={{position: "absolute", display: "flex", justifyContent: "right", width: "400px", height: "480px", userSelect: "none"}}>
+                    <RxCross2 className='hover-icon' style={{height: "30px", width: "30px"}} onClick={() => navigate("/")} />
+                </div>
                 <div style={{height: "120px", borderBottom: "solid gray 1px", width: "100%"}}>
                     <h1>Sign Up</h1>
                 </div>
@@ -120,7 +124,7 @@ const Register: React.FC<RegisterProps> = () => {
                         }
                     </Button>
                 </div>
-                <div>
+                <div  style={{zIndex: "100"}}>
                     <span>Already have an account? </span>
                     <Link to="/login" >login</Link>
                 </div>

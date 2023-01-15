@@ -41,6 +41,7 @@ const CreatePage: React.FC = () => {
                 })
             })
 
+            console.log(await response.json());
             setSucces(true);
             
         }catch(err){
