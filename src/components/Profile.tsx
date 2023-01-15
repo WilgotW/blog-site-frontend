@@ -2,6 +2,9 @@ import React, { useState, useEffect} from 'react'
 import { FC } from 'react';
 import Post from './Post';
 import Box from '../components/Box';
+import Button from '@mui/material/Button';
+
+import { useNavigate } from 'react-router-dom';
 
 interface BlogType {
     title: String,
@@ -15,6 +18,9 @@ const Profile:FC = () => {
     
     const [posts, setPosts] = useState<BlogType>({title: '', content: '', likes: 0, blogId: '', userId: ''});
     const [username, setUsername] = useState<String>("");
+
+    const nav = useNavigate();
+    const navigate = (path: String) => nav(path.toString());
 
     const getUsername = async () => {
         console.log(localStorage.getItem("token"))
@@ -79,6 +85,11 @@ const Profile:FC = () => {
                     <div style={{minWidth: "150px"}}>
                         <h2>{username}</h2>
                     </div>
+                </div>
+                <div style={{position: "absolute", width: "60%", display: "flex", justifyContent: "right"}}>
+                    <Button variant="contained" type="submit" value="Submit" onClick={() => navigate("/")}> 
+                        home
+                    </Button>
                 </div>
                 <div>
                 </div>
