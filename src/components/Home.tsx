@@ -79,7 +79,11 @@ export default function Home() {
                   <div style={{borderBottom: "solid white 2px", borderRadius: "20px", width: "230px"}}></div> 
                   <span style={{fontWeight: "200"}}>or</span>   
                   <div>
-                    <Button variant="contained" style={{width: "200px", height: "50px"}} onClick={() => navigate("/create")}>create blog</Button>
+                    {loggedIn ?
+                      <Button variant="contained" style={{width: "200px", height: "50px"}} onClick={() => navigate("/create")}>create blog</Button>
+                      :
+                      <Button variant="contained" style={{width: "200px", height: "50px"}} onClick={() => navigate("/login")}>create blog</Button>
+                    }
                   </div>       
                 </div>
               </div>
