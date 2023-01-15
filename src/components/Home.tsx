@@ -11,7 +11,7 @@ import BlogSection from './BlogSection';
 
 export default function Home() {
 
-  const myRef = useRef(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const nav = useNavigate();
   const navigate = (path: String) => nav(path.toString());
@@ -31,6 +31,12 @@ export default function Home() {
     localStorage.clear();
     window.location.reload();
   }
+
+  const scroll = () => {
+    if(scrollRef.current){
+      scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   useEffect(() => {
     checkIfLoggedIn();
@@ -94,7 +100,7 @@ export default function Home() {
           
           <div style={{position: "absolute", bottom: "0", left: "0", display: "flex", justifyContent: "center", width: "100%", height: "100px"}}>
             {loggedIn ?
-              <Button variant="outlined" style={{width: "200px", height: "50px", color: "white", borderColor: "white"}} startIcon={<AiOutlineArrowDown />} endIcon={<AiOutlineArrowDown />}>Browse</Button>
+              <Button variant="outlined" onClick={() => scroll()} style={{width: "200px", height: "50px", color: "white", borderColor: "white"}} startIcon={<AiOutlineArrowDown />} endIcon={<AiOutlineArrowDown />}>Browse</Button>
               :
               <Button variant="outlined" onClick={() => navigate("/login")}  style={{width: "200px", height: "50px", color: "white", borderColor: "white"}} startIcon={<AiOutlineArrowDown />} endIcon={<AiOutlineArrowDown />}>Browse</Button>
             }
@@ -102,7 +108,9 @@ export default function Home() {
         </div>
       </div>
       {loggedIn &&
-        <BlogSection />
+        <div ref={scrollRef}>
+          <BlogSection/>
+        </div>
       }
     </div>
   )
