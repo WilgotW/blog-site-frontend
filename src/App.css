@@ -144,3 +144,7 @@ body {
   width: 0;
   background-color: transparent;
 }
+
+.bottom-border-gradient{
+  background: linear-gradient(to top, rgb(111, 111, 111) 0%, rgba(128,128,128,0) 100%);
+}

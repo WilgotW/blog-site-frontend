@@ -14,6 +14,31 @@ interface BlogType {
 const Profile:FC = () => {
     
     const [posts, setPosts] = useState<BlogType>({title: '', content: '', likes: 0, blogId: '', userId: ''});
+    const [username, setUsername] = useState<String>("");
+
+    const getUsername = async () => {
+        console.log(localStorage.getItem("token"))
+        try{
+        
+            const response = await fetch("http://localhost:4000/api/user/get-user-info", {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin':'*',
+                    'token': `${localStorage.getItem("token")}`
+                }
+            })
+            
+            const data = await response.json();
+            console.log(await data);
+
+            setUsername(await data.name)
+            
+            
+        }catch(err){
+            console.log(err);
+        }
+    }
 
     const getMyPosts = async () => {
         
@@ -39,6 +64,7 @@ const Profile:FC = () => {
     }
 
     useEffect(() => {
+        getUsername();
         getMyPosts();
     }, [])
 
@@ -48,10 +74,10 @@ const Profile:FC = () => {
             <div style={{width: "100%", height: "200px", background: "#f5f5f5", display: "flex", alignItems: "center", justifyContent: "center"}}>
                 <div style={{display: "flex", alignItems: "center", width: "90%"}}>
                     <div style={{width: "150px", height: "150px", borderRadius: "1000px", background: "orange"}}>
-                        profile 
+                         
                     </div>
                     <div style={{minWidth: "150px"}}>
-                        <h2>{localStorage.getItem('user_name')}</h2>
+                        <h2>{username}</h2>
                     </div>
                 </div>
                 <div>
@@ -64,13 +90,9 @@ const Profile:FC = () => {
                 </div>
                 <div style={{display: "flex", justifyContent: "center"}}>
                     <div className='my-post-grid'>
-                        {Object.keys(posts).length > 0 ?
+                        {Object.keys(posts).length > 0 &&
                             <>
                                 {Object.entries(posts).map(([key, value]) => <Post key={key} title={value.title} content={value.content} likes={value.likes} />)}
-                            </>
-                            :
-                            <>
-                                <h3>no blogs</h3>
                             </>
                         }
                     </div>

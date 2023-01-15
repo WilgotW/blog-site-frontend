@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -7,6 +7,7 @@ import {HiLockClosed} from 'react-icons/hi';
 import {MdMail} from 'react-icons/md';
 
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface LoginProps {}
 
@@ -16,6 +17,10 @@ const Login: React.FC<LoginProps> = () => {
   const [loading, setLoading] = useState(false);
   const [missingInfo, setMissingInfo] = useState("");
   const [loginFailed, setLoginFailed] = useState(false);
+  const [succes, setSucces] = useState<boolean>(false);
+
+  const nav = useNavigate();
+  const navigate = (path: String) => nav(path.toString());
 
   const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
@@ -30,6 +35,8 @@ const Login: React.FC<LoginProps> = () => {
     }else if(!password){
         return setMissingInfo("password");
     }
+
+    localStorage.clear();
         
     setLoading(true);
     try{
@@ -49,12 +56,21 @@ const Login: React.FC<LoginProps> = () => {
         //save to localstorage
         localStorage.setItem('token', await data);
         console.log(await data)
+        setSucces(true);
     }catch(err){
         setLoginFailed(true);
         console.log(err);
     }
     setLoading(false);
   }
+    useEffect(() => {
+        if(succes){
+            setLoading(true);
+            setTimeout(() => {
+                navigate("/");
+            }, 2000)
+        }
+    }, [succes])
 
   return (
     <div className='form-container'>

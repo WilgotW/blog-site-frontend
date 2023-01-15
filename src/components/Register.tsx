@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -9,6 +9,7 @@ import {HiLockClosed} from 'react-icons/hi';
 import {MdMail} from 'react-icons/md';
 
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 interface RegisterProps {}
@@ -19,6 +20,10 @@ const Register: React.FC<RegisterProps> = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [missingInfo, setMissingInfo] = useState("");
+  const [succes, setSucces] = useState<boolean>(false);
+
+  const nav = useNavigate();
+  const navigate = (path: String) => nav(path.toString());
 
   const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
@@ -34,6 +39,8 @@ const Register: React.FC<RegisterProps> = () => {
         return setMissingInfo("password");
     }
         
+    localStorage.clear();
+    
     setLoading(true);
     
     try{
@@ -49,13 +56,23 @@ const Register: React.FC<RegisterProps> = () => {
                 password: password
             })
         })
-        localStorage.setItem('user_name', name);
+        // localStorage.setItem('user_name', name);
         alert(`Welcome ${name}`);
+        setSucces(true);
     }catch(err){
         console.log(err);
     }
     setLoading(false);
   }
+    
+    useEffect(() => {
+        if(succes){
+            setLoading(true);
+            setTimeout(() => {
+                navigate("/login");
+            }, 2000)
+        }
+    }, [succes])
 
   return (
     <div className='form-container'>
