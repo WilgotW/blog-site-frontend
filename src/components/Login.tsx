@@ -41,7 +41,7 @@ const Login: React.FC<LoginProps> = () => {
         
     setLoading(true);
     try{
-        const response = await fetch("https://blogsite-backend-postgressql-production.up.railway.app/api/user/login", {
+        const response = await fetch("https://relieved-harmony-production.up.railway.app/api/user/login", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

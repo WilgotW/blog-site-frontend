@@ -20,7 +20,7 @@ const Post = ({title, content, likes, date, blog_id}: IProps) =>  {
     const likePost = async (cValue: Number) => {
         try{
         
-            const response = await fetch(`https://blogsite-backend-postgressql-production.up.railway.app/api/blog/like/${blog_id}`, {
+            const response = await fetch(`https://relieved-harmony-production.up.railway.app/api/blog/like/${blog_id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

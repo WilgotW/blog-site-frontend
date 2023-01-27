@@ -24,7 +24,7 @@ const BlogSearchPage = () => {
 
     const searchBlogs = async () => {
         try{
-            const response = await fetch(`https://blogsite-backend-postgressql-production.up.railway.app/api/blog/search/${searchTerm}`, {
+            const response = await fetch(`https://relieved-harmony-production.up.railway.app/api/blog/search/${searchTerm}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
